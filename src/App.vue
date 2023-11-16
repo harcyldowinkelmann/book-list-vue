@@ -40,8 +40,15 @@
           isRead: false,
           isbn: "0-395-07157-8",
           author: "Daniel Trejo",
-        },
+        }
       ]);
+
+  function addBook(newBook) {
+    newBook.id = Math.max(...books.map(el => el.id)) + 1;
+    books.push(newBook);
+    showAddBook.value = false;
+    console.log(books);
+  }
 
   let showAddBook = ref(false);
 
@@ -76,7 +83,7 @@
     </div>
   </div>
   <div v-else class="container">
-    <AddBook @closeAddBook="showAddBook = false" />
+    <AddBook @addBook="addBook" @closeAddBook="showAddBook = false" />
   </div>
 </template>
 

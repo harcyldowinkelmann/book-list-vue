@@ -1,5 +1,14 @@
 <script setup>
 
+    let newBook = {
+          title: "",
+          cover:
+            "",
+          isRead: false,
+          isbn: "",
+          author: "",
+        };
+
 </script>
 
 <template>
@@ -22,6 +31,8 @@
             type="text"
             name="text"
             placeholder="Adicione o título"
+            v-model="newBook.title"
+            required
         />
         </div>
         <div class="form-control">
@@ -30,6 +41,8 @@
             type="text" 
             name="cover" 
             placeholder="Adicione o link da imagem de capa"
+            v-model="newBook.cover"
+            required
             />
         </div>
         <div class="form-control">
@@ -38,6 +51,7 @@
             type="text"
             name="author"
             placeholder="Adicione o autor"
+            v-model="newBook.author"
         />
         </div>
         <div class="form-control">
@@ -45,18 +59,20 @@
         <input 
             type="text" 
             name="isbn" 
-            placeholder="Adicione o ISBN" 
+            placeholder="Adicione o ISBN"
+            v-model="newBook.isbn" 
         />
         </div>
         <div class="form-control form-control-check">
         <input 
             type="checkbox" 
             name="readIt" 
-            id="readIt" 
+            id="readIt"
+            v-model="newBook.isRead"
             />
         <label for="readIt">Já li o livro</label>
         </div>
  
-        <button type="submit" class="btn btn-block">Salvar livro</button>
+        <button @click.prevent="$emit('addBook', newBook)" type="submit" class="btn btn-block">Salvar livro</button>
     </form>
 </template>
