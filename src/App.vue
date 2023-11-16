@@ -1,56 +1,73 @@
 <script setup>
+  import Books from './components/Books.vue'
   import { reactive } from 'vue';
-  import Progress from './components/Progress.vue';
 
-  // reactive usado, convencionalmente, para objetos reativos e dinâmicos
-  let courses = reactive([
-    {
-      title: "JavaScript",
-      description: "Curso básico de JavaScript",
-      done: true
-    },
-    {
-      title: "React",
-      description: "Curso básico de React",
-      done: false
-    },
-    {
-      title: "Vue",
-      description: "Curso básico de Vue",
-      done: true
-    }
-  ]);
+  let books = reactive([
+        {
+          id: 1,
+          title: "History of Europe",
+          cover:
+            "https://printpress.cmsmasters.net/default/wp-content/uploads/sites/11/2019/05/printpress-product-6-540x861.jpg",
+          isRead: true,
+          isbn: "0-395-07157-8",
+          author: "Daniel Trejo",
+        },
+        {
+          id: 2,
+          title: "Penguin Classics",
+          cover:
+            "https://printpress.cmsmasters.net/default/wp-content/uploads/sites/11/2019/05/printpress-product-2-540x861.jpg",
+          isRead: false,
+          isbn: "0-395-07157-8",
+          author: "Daniel Trejo, Jon Snow",
+        },
+        {
+          id: 3,
+          title: "Robots in Lightspeed",
+          cover:
+            "https://printpress.cmsmasters.net/wp-content/uploads/2018/11/shop-15.jpg",
+          isRead: true,
+          isbn: "0-395-07157-8",
+          author: "Jennifer Jones",
+        },
+        {
+          id: 4,
+          title: "Sonnets",
+          cover:
+            "https://printpress.cmsmasters.net/default/wp-content/uploads/sites/11/2019/05/printpress-product-5-540x861.jpg",
+          isRead: false,
+          isbn: "0-395-07157-8",
+          author: "Daniel Trejo",
+        },
+      ]);
 
-  let newCourse = {done:false};
-
-  function addCourse() {
-    courses.push(newCourse);
-    newCourse = {done:false};
+  function toggleIsRead(id) {
+    books.forEach((book) => {
+      if(book.id === id) {
+        book.isRead = !book.isRead;
+      }
+    });
   }
-
 </script>
 
 <template>
-  <div>
-    <h1>Lista de Cursos</h1>
-    <ul>
-      <li v-for="course in courses" :key="course.title">
-        {{ course.title }}
-        <ul>
-          <li>{{ course.description }}</li>
-        </ul>
-      </li>
-    </ul>
-
-    <br />
-
-    <p>Adicionar curso:</p>
-    <input v-model="newCourse.title" type="text" placeholder="Nome do curso..."> <br />
-    <input v-model="newCourse.description" type="text" placeholder="Descrição do curso..."> <br />
-    <button @click="addCourse()">Adicionar</button>
-
-    <Progress :courses="courses" />
-
+  <div class="container">
+    <h1>📖 Meus Livros</h1>
+    <div class="header-btns">
+      <button
+        class="btn"
+        
+      >
+        Adicionar Livro +
+      </button>
+      <button class="btn">
+        Visão Lista
+      </button>
+    </div>
+ 
+    <div class="books-container">
+      <Books @toggleIsRead="toggleIsRead" :books="books" />
+    </div>
   </div>
 </template>
 
