@@ -10,7 +10,7 @@
           title: "History of Europe",
           cover:
             "https://printpress.cmsmasters.net/default/wp-content/uploads/sites/11/2019/05/printpress-product-6-540x861.jpg",
-          isRead: true,
+          isRead: false,
           isbn: "0-395-07157-8",
           author: "Daniel Trejo",
         },
